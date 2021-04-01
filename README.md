@@ -29,9 +29,9 @@ population::Array{<:Individual}
 
 Each subclass must also implement
 ```julia
-populate(e::<:AbstractEvolution)
-evaluate(e::<:AbstractEvolution)
-generation(e::<:AbstractEvolution)
+populate!(e::<:AbstractEvolution)
+evaluate!(e::<:AbstractEvolution)
+generation!(e::<:AbstractEvolution)
 ```
 
 An example Genetic Algorithm and the `1+λ` algorithm are provided in `src/GA.jl`

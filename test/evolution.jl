@@ -6,17 +6,17 @@ cfg = get_config("test.yaml")
 @testset "Random fitness" begin
     e = Evolution{FloatIndividual}(cfg)
 
-    evaluate(e::Evolution) = random_evaluate(e)
-    populate(e::Evolution) = oneplus_populate(e)
+    evaluate!(e::Evolution) = random_evaluate!(e)
+    populate!(e::Evolution) = oneplus_populate!(e)
 
     @test length(e.population) == cfg.n_population
     for i in e.population
         @test all(i.fitness .== -Inf)
     end
 
-    evaluate(e)
+    evaluate!(e)
     fits = [i.fitness[1] for i in e.population]
-    evaluate(e)
+    evaluate!(e)
     # random fitness, all values should change
     for i in eachindex(e.population)
         @test fits[i] != e.population[i].fitness[1]

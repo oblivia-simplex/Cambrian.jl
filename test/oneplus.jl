@@ -16,14 +16,14 @@ function test_oneplus_evo(fitness::Function, d_fitness::Int)
         @test all(i.fitness .== -Inf)
     end
 
-    evaluate(e)
+    evaluate!(e)
 
     for i in e.population
         @test i.fitness == fitness(i)
     end
     best = sort(e.population)[end]
 
-    populate(e)
+    populate!(e)
     new_best = sort(e.population)[end]
     @test !(new_best < best)
     max_count = 0

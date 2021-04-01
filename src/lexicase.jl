@@ -1,4 +1,4 @@
-export lexicase_evaluate
+export lexicase_evaluate!
 
 function mse_valid(h::AbstractArray, y::AbstractArray; margin::Float64=0.1)
     sum((h - y).^2) < margin

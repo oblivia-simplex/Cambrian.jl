@@ -1,12 +1,12 @@
-export evaluate, random_evaluate, fitness_evaluate
+export evaluate!, random_evaluate!, fitness_evaluate!
 
 """
-    evaluate(e::AbstractEvolution)
+    evaluate!(e::AbstractEvolution)
 
 Default evaluate function. Sets each element of the fitness array of each
 individual to -Inf.
 """
-function evaluate(e::AbstractEvolution)
+function evaluate!(e::AbstractEvolution)
     for i in eachindex(e.population)
         for d in 1:e.config.d_fitness
             e.population[i].fitness[d] = -Inf
@@ -15,7 +15,7 @@ function evaluate(e::AbstractEvolution)
 end
 
 "sets the fitness value of each individual to rand()"
-function random_evaluate(e::AbstractEvolution)
+function random_evaluate!(e::AbstractEvolution)
     for i in eachindex(e.population)
         for d in 1:e.config.d_fitness
             e.population[i].fitness[d] = rand()
@@ -23,16 +23,16 @@ function random_evaluate(e::AbstractEvolution)
     end
 end
 
-function null_evaluate(i::Individual)
+function null_evaluate!(i::Individual)
     i.fitness[:] .= -Inf
 end
 
 """
-    function fitness_evaluate(e::AbstractEvolution; fitness::Function=null_evaluate)
+    function fitness_evaluate!(e::AbstractEvolution; fitness::Function=null_evaluate)
 
 sets the fitness of each individual to the Array of values returned by fitness
 """
-function fitness_evaluate(e::AbstractEvolution, fitness::Function=null_evaluate)
+function fitness_evaluate!(e::AbstractEvolution, fitness::Function=null_evaluate)
     for i in eachindex(e.population)
         e.population[i].fitness[:] = fitness(e.population[i])[:]
     end

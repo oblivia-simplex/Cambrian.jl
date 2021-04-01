@@ -1,4 +1,4 @@
-export GAEvo, evaluate, populate
+export GAEvo, evaluate!, populate!
 
 """
 
@@ -27,12 +27,12 @@ function GAEvo{T}(cfg::NamedTuple, fitness::Function;
     GAEvo(cfg, logger, population, fitness, 0)
 end
 
-evaluate(e::GAEvo) = fitness_evaluate(e, e.fitness)
+evaluate!(e::GAEvo) = fitness_evaluate!(e, e.fitness)
 
 """
-populate(e::GAEvo)
+populate!(e::GAEvo)
 """
-function ga_populate(e::AbstractEvolution)
+function ga_populate!(e::AbstractEvolution)
     new_pop = Array{Individual}(undef, 0)
     if e.config.n_elite > 0
         sort!(e.population)
@@ -54,6 +54,6 @@ function ga_populate(e::AbstractEvolution)
     e.population = new_pop
 end
 
-function populate(e::GAEvo)
-    ga_populate(e)
+function populate!(e::GAEvo)
+    ga_populate!(e)
 end

@@ -18,4 +18,13 @@ include("step.jl")
 include("oneplus.jl")
 include("GA.jl")
 
+##
+# Giving these methods bang names, since they are expected to mutate the
+# AbstractEvolution instance.
+##
+
+@deprecate populate(e) populate!(e) true
+@deprecate evaluate(e) evaluate!(e) true
+@deprecate generation(e) generation!(e) true
+
 end
