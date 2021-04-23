@@ -39,7 +39,7 @@ function ga_populate!(e::AbstractEvolution)
         append!(new_pop,
                 e.population[(length(e.population)-e.config.n_elite+1):end])
     end
-    for i in (e.config.n_elite+1):e.config.n_population
+    for i in (e.config.n_elite+1):prod(e.config.n_population)
         p1 = selection(e.population)
         child = deepcopy(p1)
         if e.config.p_crossover > 0 && rand() < e.config.p_crossover

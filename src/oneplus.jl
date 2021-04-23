@@ -30,7 +30,7 @@ end
 function oneplus_populate!(e::AbstractEvolution)
     p1 = max_selection(e.population)
     e.population[1] = p1
-    for i in 2:e.config.n_population
+    for i in 2:prod(e.config.n_population)
         e.population[i] = mutate(p1)
     end
 end

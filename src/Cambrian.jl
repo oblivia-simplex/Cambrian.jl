@@ -23,8 +23,8 @@ include("GA.jl")
 # AbstractEvolution instance.
 ##
 
-@deprecate populate(e) populate!(e) true
-@deprecate evaluate(e) evaluate!(e) true
-@deprecate generation(e) generation!(e) true
+@deprecate populate(e) Cambrian.populate!(e) true
+@deprecate evaluate(e) Cambrian.evaluate!(e) true
+@deprecate generation(e) Cambrian.generation!(e) true
 
 end

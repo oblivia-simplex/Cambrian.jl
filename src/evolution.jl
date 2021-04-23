@@ -1,5 +1,7 @@
 export AbstractEvolution, Evolution, log_gen, save_gen, get_best
 
+include("geography.jl")
+
 abstract type AbstractEvolution end
 
 """
@@ -18,7 +20,7 @@ see the default functions for reference
 mutable struct Evolution{T} <: AbstractEvolution
     config::NamedTuple
     logger::CambrianLogger
-    population::Array{T}
+    population::Union{Array{T},Geography{T}}
     gen::Int
 end
 
@@ -52,8 +54,12 @@ end
 
 "create all members of the first generation"
 function initialize(itype::Type, cfg::NamedTuple)
-    population = Array{itype}(undef, cfg.n_population)
-    for i in 1:cfg.n_population
+    if cfg.n_population isa Vector
+        # then the population should be a Geography
+        return Geography(itype, cfg)
+    end
+    population = Array{itype}(undef, prod(cfg.n_population))
+    for i in 1:prod(cfg.n_population)
         population[i] = itype(cfg)
     end
     population
