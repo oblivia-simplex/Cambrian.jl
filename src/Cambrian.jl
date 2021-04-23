@@ -11,12 +11,14 @@ import Dates
 include("config.jl")
 include("logger.jl")
 include("individual.jl")
+include("geography.jl")
 include("evolution.jl")
 include("selection.jl")
 include("evaluation.jl")
 include("step.jl")
 include("oneplus.jl")
 include("GA.jl")
+
 
 ##
 # Giving these methods bang names, since they are expected to mutate the

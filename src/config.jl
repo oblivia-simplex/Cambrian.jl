@@ -13,9 +13,11 @@ function get_base_config()
 end
 
 "convert Dict to named tuple"
-function get_config(cfg::Dict)
-    (; (Symbol(k)=>v for (k, v) in cfg)...)
+function proc_config(cfg::Dict)
+    (; (Symbol(k)=>proc_config(v) for (k, v) in cfg)...)
 end
+
+proc_config(v) = v
 
 "combine YAML file and kwargs, make sure ID is specified"
 function get_config(cfg_file::String; kwargs...)
@@ -27,5 +29,5 @@ function get_config(cfg_file::String; kwargs...)
     if ~(:id in keys(cfg))
         cfg["id"] = string(Dates.now())
     end
-    get_config(cfg)
+    proc_config(cfg)
 end

@@ -1,7 +1,5 @@
 export AbstractEvolution, Evolution, log_gen, save_gen, get_best
 
-include("geography.jl")
-
 abstract type AbstractEvolution end
 
 """
