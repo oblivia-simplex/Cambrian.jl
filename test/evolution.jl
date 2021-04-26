@@ -8,7 +8,7 @@ cfg = get_config("test.yaml")
     @show e
     evaluate!(e::Evolution) = random_evaluate!(e)
     populate!(e::Evolution) = oneplus_populate!(e)
-    @test length(e.population) == prod(cfg.n_population)
+    @test length(e.population) == prod(cfg.population.size)
     for i in e.population
         @test all(i.fitness .== -Inf)
     end

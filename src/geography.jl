@@ -21,8 +21,8 @@ function Geography(
     config,
 )
 
-    dimstr = join(string.(config.n_population), "×")
-    @info "Generating distributed population of $dimstr ($(prod(config.n_population))) genomes..."
+    dimstr = join(string.(config.population.size), "×")
+    @info "Generating distributed population of $dimstr ($(prod(config.population.size))) genomes..."
 
     indices = CartesianIndices(Tuple(config.n_population))
     deme = [constructor(config) for _ in indices]
@@ -111,6 +111,7 @@ Base.sort(geo::Geography) = Base.sort(geo.deme)
 Base.length(geo::Geography) = Base.length(geo.deme)
 
 Base.getindex(geo::Geography, i) = Base.getindex(geo.deme, i)
+Base.setindex!(geo::Geography, g, i) = Base.setindex!(geo.deme, g, i)
 
 Base.size(geo::Geography) = Base.size(geo.deme)
 Base.size(geo::Geography, dim) = Base.size(geo.deme, dim)

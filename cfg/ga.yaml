@@ -1,7 +1,10 @@
 # Cambrian base config
 seed: 0            # evolution seed
 d_fitness: 1       # fitness dimension
-n_population: 10   # population size
+
+population:
+  size: 10   # population size
+
 n_elite: 2         # elites to carry over each generation
 n_gen: 10          # number of generations
 log_gen: 1         # log every x generations

@@ -11,7 +11,7 @@ function test_oneplus_evo(fitness::Function, d_fitness::Int)
     cfg = get_config("../cfg/oneplus.yaml"; d_fitness=d_fitness, id="test")
     e = OnePlusEvo{Cambrian.FloatIndividual}(cfg, fitness)
 
-    @test length(e.population) == cfg.n_population
+    @test length(e.population) == cfg.population.size
     for i in e.population
         @test all(i.fitness .== -Inf)
     end
@@ -40,7 +40,7 @@ function test_oneplus_evo(fitness::Function, d_fitness::Int)
     e.gen += 1
 
     step!(e)
-    @test length(e.population) == cfg.n_population
+    @test length(e.population) == cfg.population.size
     for i in e.population
         @test i.fitness == fitness(i)
     end
@@ -52,7 +52,7 @@ function test_oneplus_evo(fitness::Function, d_fitness::Int)
     @timev step!(e)
 
     run!(e)
-    @test length(e.population) == cfg.n_population
+    @test length(e.population) == cfg.population.size
     for i in e.population
         @test i.fitness == fitness(i)
     end

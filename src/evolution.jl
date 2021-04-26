@@ -52,12 +52,12 @@ end
 
 "create all members of the first generation"
 function initialize(itype::Type, cfg::NamedTuple)
-    if cfg.n_population isa Vector
+    if cfg.population.size isa Vector
         # then the population should be a Geography
         return Geography(itype, cfg)
     end
-    population = Array{itype}(undef, prod(cfg.n_population))
-    for i in 1:prod(cfg.n_population)
+    population = Array{itype}(undef, prod(cfg.population.size))
+    for i in 1:prod(cfg.population.size)
         population[i] = itype(cfg)
     end
     population
